@@ -1,0 +1,25 @@
+{
+  "name": "phonewebshop",
+  "version": "1.0.0",
+  "description": "Gyakorlás node.js-sel",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm server.js",
+    "dev": "nodemon ./server.js --ignore 'src/products.json'" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bottyanhammer/phoneWebshop.git"
+  },
+  "author": "HP",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bottyanhammer/phoneWebshop/issues"
+  },
+  "homepage": "https://github.com/bottyanhammer/phoneWebshop#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.0"
+  }
+}

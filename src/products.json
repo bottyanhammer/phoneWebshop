@@ -1,0 +1,74 @@
+[
+    {
+        "id": 0,
+        "make": "Fender",
+        "model": "Les Paul",
+        "picture" : "1.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 50000,
+        "stock": 10
+    },
+    {
+        "id": 1,
+        "make": "Fender",
+        "model": "RG",
+        "picture" : "2.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 78000,
+        "stock": 10
+    },
+    {
+        "id": 2,
+        "make": "Fender",
+        "model": "Stratocaster",
+        "picture" : "3.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 95000,
+        "stock": 10
+    },
+    {
+        "id": 3,
+        "make": "Gibson",
+        "model": "Grand Concert",
+        "picture" : "4.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 100000,
+        "stock": 10
+    },
+    {
+        "id": 4,
+        "make": "Gibson",
+        "model": "Parlor",
+        "picture" : "5.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 80000,
+        "stock": 10
+    },
+    {
+        "id": 5,
+        "make": "Gibson",
+        "model": "Malibu",
+        "picture" : "6.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 70000,
+        "stock": 10
+    },
+    {
+        "id": 6,
+        "make": "Ibanez",
+        "model": "Kinder",
+        "picture" : "7.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 40000,
+        "stock": 10
+    },
+    {
+        "id": 7,
+        "make": "Ibanez",
+        "model": "Auditorium",
+        "picture" : "8.jpg",
+        "description": "Some quick example text to build on the card title and make up the bulk of the card's content.",
+        "price": 60000,
+        "stock": 10
+    }
+]
