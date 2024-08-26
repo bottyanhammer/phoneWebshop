@@ -2,8 +2,8 @@ const renderCards = (data) => {
     const wrapper = document.querySelector(".wrapper");
     wrapper.innerHTML = "";
     // for (let product of data) {} // Konkatenálás helyett map().join("")
-    const cardElements = data.map(({make, model, picture, description, price, stock}) => 
-        `<div class="card">
+    const cardElements = data.map(({ id, make, model, picture, description, price, stock }) => 
+        `<div class="card data-id="${id}">
                 <img src="./images/${picture}" alt="" title="">
                 <div class="card-body">
                     <h3>${make}</h3>
@@ -14,8 +14,8 @@ const renderCards = (data) => {
                         <h5>${stock} db</h5>
                     </div>
                     <div class="buttons">
-                        <button type="button">Szerkeszt</button>
-                        <button type="button">Töröl</button>
+                        <button class="edit-btn" type="button">Szerkeszt</button>
+                        <button class="delet-btn" type="button">Töröl</button>
                     </div>
                 </div>
             </div>`).join(""); // A tömböt elválasztók nélkül egy sztringgé fűzzük össze.
@@ -23,11 +23,13 @@ const renderCards = (data) => {
 };
 
 const cardModification = (event) => {
-
+    const card = event.target.closest(".card");
+    const productId = card.dataset.id;
 };
 
 function cardDeletion(event) {
-
+    const card = event.target.closest(".card");
+    const productId = card.dataset.id;
 };
 
 const getAllProducts = async() => {

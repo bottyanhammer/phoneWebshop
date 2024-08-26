@@ -14,6 +14,8 @@ export const router = (req, res) => {
     } else if (pathName === "/getProducts" && req.method === "GET") {
         serveProducts(req, res);
     } else if (req.method === "GET") {
+
+    } else if (req.method === "GET") {
         serveStaticFiles(req, res);
     } else {
         notFoundHandler(req, res);
