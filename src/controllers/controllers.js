@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { getAllProducts } from "../models/model.js";
 
 export const serveIndex = (req, res) => {
     const indexPath = path.join(process.cwd(), "public", "index.html");
@@ -12,6 +13,19 @@ export const serveIndex = (req, res) => {
         } else {
             res.statusCode = 200;
             res.end(data);
+        }
+    })
+};
+
+export const serveProducts = (req, res) => {
+    // A getAllProducts bemenő paramétere egy kétparaméteres callback függvény!!!
+    getAllProducts((err, products) => {
+        if (err) {
+            res.statusCode = 500;
+            res.end(JSON.stringify({error: err.message}));
+        } else {
+            res.writeHead(200, {"Content-Type": "application/json"});
+            res.end(JSON.stringify(products)); // Az adatok json-formátumban mennek el.
         }
     })
 }
