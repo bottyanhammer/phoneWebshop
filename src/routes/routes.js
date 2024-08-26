@@ -1,6 +1,8 @@
 import path from "node:path";
 import { serveIndex } from "../controllers/controllers.js";
 import { serveProducts } from "../controllers/controllers.js";
+import { serveStaticFiles } from "../controllers/controllers.js";
+import { notFoundHandler } from "../controllers/controllers.js";
 
 export const router = (req, res) => {
     const parsedURL = new URL(req.url, `http://${req.headers.host}`); // Egy objektumot kapunk!
@@ -14,6 +16,6 @@ export const router = (req, res) => {
     } else if (req.method === "GET") {
         serveStaticFiles(req, res);
     } else {
-        console.log("Ez  még üres!");
+        notFoundHandler(req, res);
     }
 }

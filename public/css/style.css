@@ -1,0 +1,52 @@
+:root{
+    --background: rgba(0, 121, 145,1);
+    --backHeader: rgba(34, 46, 80,1);
+    --backCard: rgba(188, 216, 193,1);
+    --green1: rgba(67, 154, 134,1);
+    --yellow1: rgba(233, 217, 133,1);
+}
+
+*{box-sizing: border-box; margin: 0; padding: 0;}
+img{width: 100%;}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background);
+}
+header{
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--backHeader);
+}
+.wrapper{
+    padding: 1rem, 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card{
+    background-color: var(--backCard);
+}
+
+.card-body{
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+}
+.card-body>div, .buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    font-size: 1.1rem;
+    padding: .5rem .8rem;
+    text-align: center;
+    background-color: var(--green1);
+}
+button:hover{
+    background-color: var(--yellow1);
+}
+
