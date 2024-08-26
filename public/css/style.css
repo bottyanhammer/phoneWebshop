@@ -19,14 +19,16 @@ header{
     background-color: var(--backHeader);
 }
 .wrapper{
-    padding: 1rem, 0;
+    padding: 1rem 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
 }
 
 .card{
     background-color: var(--backCard);
+    max-width: 20rem;
 }
 
 .card-body{

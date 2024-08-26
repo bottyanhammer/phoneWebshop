@@ -36,8 +36,8 @@ export const serveStaticFiles = (req, res) => {
         ".js" : "application/javascript",
         ".css": "text/css",
         ".png": "image/png",
-        "jpg": "image/jpg",
-        "jpeg": "image/jpeg",
+        ".jpg": "image/jpg",
+        ".jpeg": "image/jpeg",
         ".ico": "image/x-icon"
     };
 
