@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getAllProducts } from "../models/model.js";
+import { getAllProducts, setProductById } from "../models/model.js";
 import { getProductById } from "../models/model.js";
 
 export const serveIndex = (req, res) => {
@@ -67,10 +67,10 @@ export const serveProduct = (req, res, id) => {
             res.end(JSON.stringify({message: err.message}));
         };
         
-        // Html code generation:
+        // Html code generation (data-currentId ből data-currentid lesz!!!):
         const html = `
             <section class="mod-window">
-                <div class="popup-content">
+                <div class="popup-content" data-currentId="${product.id}">
                     <h2>A termék adatainak módosítása</h2>
                     <ul>
                         <li><label for="make">Gyártó:</label> <input type="text" id="make" value="${product.make}"></li>
@@ -89,6 +89,20 @@ export const serveProduct = (req, res, id) => {
         res.writeHead(200, {"Content-Type": "text/html"});
         res.end(html);
     })
+};
+
+export const serveProductModify = (req, res, id) => {
+    let body = "";
+    req.on("data", (chunk) => {
+        body += chunk.toString();
+    });
+
+    req.on("end", () => {
+        const productToBeModified = JSON.parse(body);
+        setProductById(id, productToBeModified, (err, product) => {
+            // TODO
+        });
+    });    
 }
 
 export const notFoundHandler = (req, res) => {

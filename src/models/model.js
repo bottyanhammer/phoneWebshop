@@ -36,3 +36,17 @@ export const getProductById = (id, callback) => {
         callback(null, product); // Itt már nem kell a leállítás (return), csak az adatok átadása a hívónak.
     });
 }; 
+
+export const setProductById = (id, updatedProduct, callback) => {
+    const pathOfProducts = path.join(process.cwd(), "src", "products.json");
+    fs.readFile(pathOfProducts, "utf-8", (err, data) => {
+        if (err) {
+            return callback(err, null);
+        };
+
+        const products = JSON.parse(data); // A termékek listája.
+        
+
+
+    });
+}

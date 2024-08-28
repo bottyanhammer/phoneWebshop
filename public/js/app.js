@@ -22,6 +22,64 @@ const renderCards = (data) => {
     wrapper.innerHTML = cardElements;  // cardElements egy lista, vesszőkkel határolva az elemei!!!
 };
 
+const exitButtonManager = () => {
+    const exitButton = document.querySelector(".exit");
+    exitButton.addEventListener("click", (event) => {
+        const button = event.target;
+        const popupContainer = button.closest(".popup");
+        popupContainer.classList.add("hidden");
+
+    });
+};
+
+// Modification current product:
+const getInputValues = () => {
+    const makeInputValue = document.querySelector("#make").value;
+    const modelInputValue = document.querySelector("#model").value;
+    const priceInputValue = parseInt(document.querySelector("#price").value);
+    const stockInputValue = parseInt(document.querySelector("#stock").value);
+    return [makeInputValue, modelInputValue, priceInputValue, stockInputValue];
+};
+
+const setButtonManager = () => {
+    const setButton = document.querySelector(".set");
+    let productId = "";
+    setButton.addEventListener("click", async (event) => {
+        popupContent = event.target.closest(".popup-content");
+        // A data-currentId kisbetűs lesz!!!!
+        const productId = popupContent.dataset.currentid;
+        console.log(Number(productId)); // teszt - string!!!
+
+        [make, model, price, stock] = getInputValues();
+        const newValues = {
+            make,
+            model,
+            price,
+            stock
+        };
+
+        try {
+            const response = await fetch(`/modifyProduct/${productId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newValues)
+            });
+
+            if (!response.ok) {
+                throw new Error(response.status);
+            };
+
+            const responseData = response.json();
+            if (responseData.message = ok) {
+                getAllProducts();
+            }
+
+        } catch (error) {
+            console.error(`The product modification failed: ${error}`);
+        }
+    });
+};
+
 async function getPopupWindow(event) {
     const card = event.target.closest(".card");
     console.log(card.dataset.id);  // teszt 
@@ -29,6 +87,7 @@ async function getPopupWindow(event) {
     const productId = card.dataset.id;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+
     try {
         // Egy erőforrásért megy kérés, queryParam helyett path javasolt:
         const product = await fetch(`/getProduct/${productId}`, {
@@ -44,25 +103,11 @@ async function getPopupWindow(event) {
         popupContainer.innerHTML = htmlFragment;
         popupContainer.classList.remove("hidden");
 
-        // Popup Window *************************************************
-        // Exit popup window:
-        const exitButtonManager = () => {
-            const exitButton = document.querySelector(".exit");
-            exitButton.addEventListener("click", (event) => {
-                const button = event.target;
-                const popupContainer = button.closest(".popup");
-                popupContainer.classList.add("hidden");
-            })
-        };
+        // Popup Window elemeit itt érem el:***************************************
+        // Exit popup window:        
         exitButtonManager();
 
-        // Modification current product:
-
-        const cardModification = (event) => {
-            const card = event.target.closest(".card");
-            const productId = card.dataset.id;
-        };
-        // TODO
+        setButtonManager();
 
     } catch (error) {
         console.error(`An error has occured: ${error}`);
@@ -74,7 +119,7 @@ function cardDeletion(event) {
     const productId = card.dataset.id;
 };
 
-const getAllProducts = async () => {
+async function getAllProducts() {
     try {
         const response = await fetch("/getProducts", {
             method: "GET",

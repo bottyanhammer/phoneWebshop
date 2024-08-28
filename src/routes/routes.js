@@ -19,6 +19,9 @@ export const router = (req, res) => {
         const id = pathName.split("/")[pathName.split("/").length-1];
         console.log(id, typeof(id))  //teszt
         serveProduct(req, res, id);
+    } else if (pathName.startsWith("/modifyProduct") && req.method === "PATCH") {
+        const id = pathName.split("/").pop();  // Sokkal egyszerűbb!!!
+        serveProductModify(req, res, id);
     } else if (req.method === "GET") {
         serveStaticFiles(req, res);
     } else {
