@@ -37,16 +37,33 @@ export const getProductById = (id, callback) => {
     });
 }; 
 
-export const setProductById = (id, updatedProduct, callback) => {
+export const updatedProductById = (id, newData, callback) => {
     const pathOfProducts = path.join(process.cwd(), "src", "products.json");
     fs.readFile(pathOfProducts, "utf-8", (err, data) => {
         if (err) {
             return callback(err, null);
         };
 
-        const products = JSON.parse(data); // A termékek listája.
+        let products = JSON.parse(data); // A termékek listája.
         
+        let productIndex = products.findIndex(p=> Number(p.id) === Number(id));
 
+        if (productIndex === -1) {
+            return callback(new Error("Termék nem található."), null);
+        };
 
+        // Módosítás:
+        products[productIndex] = {...products[productIndex], ...newData};
+
+        console.log(products);  // teszt 
+
+        // Fájl felülírása:
+        fs.writeFile(pathOfProducts, JSON.stringify(products, null, 2), (err)=>{
+            if (err) {
+                return callback(err, null);
+            };
+            callback(null, products[productIndex]);
+        });
+    
     });
 }

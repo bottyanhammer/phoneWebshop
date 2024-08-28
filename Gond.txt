@@ -1,0 +1,1 @@
+Nem frissül az oldal a módosítás után, és egyben nem tűnik el a módosító ablak.

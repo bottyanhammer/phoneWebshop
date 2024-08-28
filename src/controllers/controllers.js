@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { getAllProducts, setProductById } from "../models/model.js";
+import { getAllProducts, updatedProductById } from "../models/model.js";
 import { getProductById } from "../models/model.js";
 
 export const serveIndex = (req, res) => {
@@ -91,16 +91,24 @@ export const serveProduct = (req, res, id) => {
     })
 };
 
-export const serveProductModify = (req, res, id) => {
+export const serveUpdateProduct = (req, res, id) => {
     let body = "";
+
     req.on("data", (chunk) => {
         body += chunk.toString();
     });
 
     req.on("end", () => {
-        const productToBeModified = JSON.parse(body);
-        setProductById(id, productToBeModified, (err, product) => {
-            // TODO
+        const updateData = JSON.parse(body);
+
+        updatedProductById(id, updateData, (err, updatedProduct) => {
+            if (err) {
+                res.writeHead(404, {"Content-Type": "application/json"});
+                res.end(JSON.stringify({message: err.message}));
+            };
+
+            res.writeHead(200,{"Content-Type": "application/json"});
+            res.end(JSON.stringify({message: "A termék sikeresen frissítve: ", product: updatedProduct}));
         });
     });    
 }
