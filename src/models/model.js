@@ -14,4 +14,25 @@ export const getAllProducts = (callback) => {
             callback(null, products); 
         }
     })
-}
+};
+
+export const getProductById = (id, callback) => {
+    const pathOfProducts = path.join(process.cwd(), "src", "products.json");
+
+    fs.readFile(pathOfProducts, "utf-8", (err, data) => {
+        if (err) {
+            return callback(err, null); // Return, hogy a fájlolvasás leálljon. Két paraméter: hiba, adat.
+        };
+
+        const products = JSON.parse(data);
+        const product = products.find(p=> Number(p.id) === parseInt(id));
+        
+
+        if (!product) {
+            return callback(new Error("The product not found"), null); // Return, hogy a függvény is leálljon!
+        };
+
+        console.log("Find eredménye:", product);  // teszt
+        callback(null, product); // Itt már nem kell a leállítás (return), csak az adatok átadása a hívónak.
+    });
+}; 

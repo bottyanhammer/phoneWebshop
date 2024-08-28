@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { getAllProducts } from "../models/model.js";
+import { getProductById } from "../models/model.js";
 
 export const serveIndex = (req, res) => {
     const indexPath = path.join(process.cwd(), "public", "index.html");
@@ -57,6 +58,38 @@ export const serveStaticFiles = (req, res) => {
         }
     })
 };
+
+export const serveProduct = (req, res, id) => {
+    getProductById(id, (err, product) => {
+        
+        if (err) {
+            res.writeHead(404, {"Content-Type": "application/json"});
+            res.end(JSON.stringify({message: err.message}));
+        };
+        
+        // Html code generation:
+        const html = `
+            <section class="mod-window">
+                <div class="popup-content">
+                    <h2>A termék adatainak módosítása</h2>
+                    <ul>
+                        <li><label for="make">Gyártó:</label> <input type="text" id="make" value="${product.make}"></li>
+                        <li><label for="model">Model:</label> <input type="text" id="model" value="${product.model}"></li>
+                        <li><label for="price">Ár:</label> <input type="number" id="price" value="${product.price}"></li>
+                        <li><label for="stock">Készlet:</label> <input type="number" id="stock" value="${product.stock}"></li>
+                    </ul>
+                    <div class="pupup-buttons">
+                        <button class="set" type="button">Módosítás</button>
+                        <button class="exit" type="button">Mégse</button>
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        res.writeHead(200, {"Content-Type": "text/html"});
+        res.end(html);
+    })
+}
 
 export const notFoundHandler = (req, res) => {
     res.statusCode = 404;

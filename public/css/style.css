@@ -52,3 +52,39 @@ button:hover{
     background-color: var(--yellow1);
 }
 
+/*PopUp Window*/
+.mod-window{ /*.mod-window*/
+    background-color: rgba(34, 46, 80,.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-content{
+    padding: 2rem;
+    background-color: aliceblue;
+    display: flex; /*TODO Ezt none-ra állítom majd!!!*/
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+.popup-buttons{
+    display: flex;
+    row-gap: 2rem;
+}
+ul{list-style-type: none;}
+li{
+    padding-bottom: 1rem;
+}
+
+.hidden{
+    display: none;
+}
+/* .mod-window{
+    display: flex;
+} */
+

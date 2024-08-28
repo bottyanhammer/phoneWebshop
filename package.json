@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon ./server.js --ignore 'src/products.json'" 
+    "dev": "nodemon ./server.js --legacy-watch --ignore 'src/products.json'",
+    "_comment": "nodemon ./server.js --ignore 'src/products.json'" 
   },
   "repository": {
     "type": "git",
